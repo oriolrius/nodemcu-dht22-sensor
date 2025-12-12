@@ -108,14 +108,14 @@ At the top of our code, you'll see these **includes**:
 
 **What each library does:**
 
-| Library          | Purpose                             | Example Use                                |
-| ---------------- | ----------------------------------- | ------------------------------------------ |
-| `Arduino.h`    | Core Arduino functions              | `Serial.println()`, `delay()`            |
-| `ESP8266WiFi.h`| WiFi connectivity                   | Connect to your home/office WiFi           |
-| `PubSubClient.h`| MQTT communication                  | Send and receive messages via MQTT         |
-| `ArduinoJson.h`| JSON data formatting                | Create `{"temperature": 23.5}` messages  |
-| `ESPDateTime.h`| Time and date management            | Get current time from Internet             |
-| `DHT.h`        | Read DHT22 sensor                   | Get temperature and humidity readings      |
+| Library            | Purpose                  | Example Use                               |
+| ------------------ | ------------------------ | ----------------------------------------- |
+| `Arduino.h`      | Core Arduino functions   | `Serial.println()`, `delay()`         |
+| `ESP8266WiFi.h`  | WiFi connectivity        | Connect to your home/office WiFi          |
+| `PubSubClient.h` | MQTT communication       | Send and receive messages via MQTT        |
+| `ArduinoJson.h`  | JSON data formatting     | Create `{"temperature": 23.5}` messages |
+| `ESPDateTime.h`  | Time and date management | Get current time from Internet            |
+| `DHT.h`          | Read DHT22 sensor        | Get temperature and humidity readings     |
 
 > 💡 **For Students**: These libraries are **free and open source**. Thousands of developers contribute to make IoT programming easier!
 
@@ -174,14 +174,14 @@ void loop() {
 
 ### Advantages of Arduino Programming
 
-| Advantage              | Description                                          | Marketing Parallel                      |
-| ---------------------- | ---------------------------------------------------- | --------------------------------------- |
-| **Simplicity**   | No need to understand low-level electronics          | Like using WordPress vs coding in HTML  |
-| **Libraries**    | Reusable code from community                         | Using templates instead of from scratch |
-| **Clear Structure** | `setup()` and `loop()` are intuitive              | Planning phase vs. execution phase      |
+| Advantage                  | Description                                          | Marketing Parallel                      |
+| -------------------------- | ---------------------------------------------------- | --------------------------------------- |
+| **Simplicity**       | No need to understand low-level electronics          | Like using WordPress vs coding in HTML  |
+| **Libraries**        | Reusable code from community                         | Using templates instead of from scratch |
+| **Clear Structure**  | `setup()` and `loop()` are intuitive             | Planning phase vs. execution phase      |
 | **Active Community** | Millions of examples and tutorials online            | Like having a huge marketing community  |
-| **Cross-platform** | Same code works on many different Arduino boards     | Write once, deploy everywhere           |
-| **Open Source**  | Free tools, free libraries, free to share and modify | Like Creative Commons for code          |
+| **Cross-platform**   | Same code works on many different Arduino boards     | Write once, deploy everywhere           |
+| **Open Source**      | Free tools, free libraries, free to share and modify | Like Creative Commons for code          |
 
 ---
 
@@ -255,14 +255,14 @@ void loop() {
   if (sensorActive) {
     h = dht.readHumidity();        // Read humidity
     t = dht.readTemperature();     // Read temperature
-    
+  
     // Print to console
     Serial.print("Temperature: ");
     Serial.print(t);
     Serial.print("°C  Humidity: ");
     Serial.print(h);
     Serial.println("%");
-    
+  
     publishMessage();              // Send data to Internet
     delay(5000);                   // Wait 5 seconds
   } else {
@@ -281,21 +281,6 @@ void loop() {
 6. **Wait** - Pause for 5 seconds before repeating
 
 > 🔁 **Important**: After finishing, `loop()` automatically starts again from the beginning. It's an infinite cycle!
-
----
-
-### 📏 Why This Structure?
-
-This **separation** between `setup()` and `loop()` is **genius** for several reasons:
-
-| Aspect              | Benefit                                                        |
-| ------------------- | -------------------------------------------------------------- |
-| **Clarity**   | Easy to see what happens once vs. what repeats                 |
-| **Efficiency**| Connect to WiFi once, not every 5 seconds                      |
-| **Organization** | Setup code separate from working code                          |
-| **Debugging** | If something fails, you know if it's in initialization or loop |
-
-**Marketing Analogy**: It's like separating your **annual strategy** (setup) from your **daily tasks** (loop).
 
 ---
 
@@ -506,7 +491,7 @@ The sensor can receive commands via **USB cable** or **Internet (MQTT)**:
 
 ---
 
-## 📈 Project BoM (Bill of Materials) and Costs
+## 📈 Project BoM (Bill of Materials)
 
 ### Hardware Components
 
@@ -625,50 +610,6 @@ Perfect for students - all these platforms offer free tiers ideal for educationa
 4. **Real-time Operation**: The device is always working, 24/7, automatically
 5. **Bidirectional Communication**: It can send data AND receive commands
 
-### The Complete Workflow
-
-```text
-┌─────────────────────────────────────────────────────────┐
-│  POWER ON / RESET                                       │
-└────────────────┬────────────────────────────────────────┘
-                 ▼
-┌─────────────────────────────────────────────────────────┐
-│  setup() - RUN ONCE                                     │
-│  ├─ Start Serial Console                                │
-│  ├─ Connect to WiFi                                     │
-│  ├─ Sync time with NTP server                           │
-│  ├─ Connect to MQTT broker                              │
-│  └─ Initialize DHT22 sensor                             │
-└────────────────┬────────────────────────────────────────┘
-                 ▼
-┌─────────────────────────────────────────────────────────┐
-│  loop() - RUN FOREVER  ◄─────────────┐                 │
-│  ├─ Check for serial commands        │                  │
-│  ├─ Check MQTT connection             │                  │
-│  ├─ Check for MQTT commands           │                  │
-│  ├─ Read temperature from sensor      │                  │
-│  ├─ Read humidity from sensor         │                  │
-│  ├─ Create JSON message               │                  │
-│  ├─ Publish to MQTT server            │                  │
-│  └─ Wait 5 seconds                    │                  │
-└────────────────┬──────────────────────┘                  │
-                 └────────────────────────────────────────┘
-                      (Repeats infinitely)
-```
-
-### Programming Complexity Levels
-
-| Level         | What You Can Do                          | Code Example                    |
-| ------------- | ---------------------------------------- | ------------------------------- |
-| **Beginner** | Blink an LED, print messages             | `Serial.println("Hello!")`   |
-| **Intermediate** | Read sensors, connect to WiFi            | `dht.readTemperature()`       |
-| **Advanced** | MQTT communication, JSON formatting      | `client.publish(topic, data)` |
-| **Expert**   | Multi-sensor systems, complex automation | Full IoT dashboards             |
-
-> 💡 **Our project is at Intermediate/Advanced level**, but once you understand the basics, it's just combining simple building blocks!
-
----
-
 ## 🎓 Final Thoughts: What You Should Remember
 
 1. **IoT is not magic** - These are simple devices that measure, process, and send data over the Internet
@@ -677,9 +618,3 @@ Perfect for students - all these platforms offer free tiers ideal for educationa
 4. **It's scalable** - You can have 1 or 1000 sensors, all reporting to the same system
 5. **It's accessible** - With less than $20 you can have your own IoT sensor working
 6. **Programming is approachable** - With `setup()` and `loop()`, you have a clear structure to build on
-
----
-
-## 📖 Document Information
-
-*Document created for Digital Marketing course students - December 2025*

@@ -17,7 +17,8 @@ IoT temperature and humidity sensor using NodeMCU ESP8266 and DHT22. Features re
 
 ## Documentation
 
-**[Student Guide](docs/STUDENTS.md)** - Comprehensive guide for students and beginners covering:
+**[Student Guide](docs/README.md)** - Comprehensive guide for students and beginners covering:
+
 - System architecture with diagrams
 - Arduino programming fundamentals (`setup()` and `loop()`)
 - Library explanations and code walkthrough
@@ -30,7 +31,7 @@ IoT temperature and humidity sensor using NodeMCU ESP8266 and DHT22. Features re
 ### 1. Hardware Setup
 
 | DHT22 Pin | NodeMCU Pin | Description |
-|-----------|-------------|-------------|
+| --------- | ----------- | ----------- |
 | VCC (+)   | 3.3V        | Power       |
 | DATA      | D2 (GPIO4)  | Data signal |
 | GND (-)   | GND         | Ground      |
@@ -43,8 +44,8 @@ cp include/secrets.h.template include/secrets.h
 
 Edit `include/secrets.h` with your credentials:
 
-| Parameter       | Description                              |
-|-----------------|------------------------------------------|
+| Parameter         | Description                              |
+| ----------------- | ---------------------------------------- |
 | `WIFI_SSID`     | Your WiFi network name                   |
 | `WIFI_PASSWORD` | Your WiFi password                       |
 | `MQTT_HOST`     | MQTT broker (default: broker.emqx.io)    |
@@ -64,19 +65,19 @@ pio device monitor
 
 Commands work via **Serial Console** (115200 baud) and **MQTT**:
 
-| Command  | Description                    |
-|----------|--------------------------------|
-| `help`   | Show available commands        |
-| `start`  | Start sensor readings          |
-| `stop`   | Stop sensor readings           |
-| `status` | Show system status             |
+| Command    | Description             |
+| ---------- | ----------------------- |
+| `help`   | Show available commands |
+| `start`  | Start sensor readings   |
+| `stop`   | Stop sensor readings    |
+| `status` | Show system status      |
 
 ### MQTT Topics
 
-| Topic                    | Direction | Description          |
-|--------------------------|-----------|----------------------|
-| `sensors/dht22/data`     | Publish   | Sensor data output   |
-| `sensors/dht22/commands` | Subscribe | Remote commands      |
+| Topic                      | Direction | Description        |
+| -------------------------- | --------- | ------------------ |
+| `sensors/dht22/data`     | Publish   | Sensor data output |
+| `sensors/dht22/commands` | Subscribe | Remote commands    |
 
 ## Data Format
 
@@ -104,7 +105,7 @@ Commands work via **Serial Console** (115200 baud) and **MQTT**:
 ```
 nodemcu-dht22-sensor/
 ├── docs/
-│   ├── STUDENTS.md              # Student guide and documentation
+│   ├── README.md                # Student guide and documentation
 │   └── assets/
 │       ├── IoTdiagram.png       # System architecture diagram
 │       └── CompleteFlow.png     # Data flow diagram
@@ -120,22 +121,22 @@ nodemcu-dht22-sensor/
 
 ## Hardware Requirements
 
-| Component       | Approximate Cost |
-|-----------------|------------------|
-| NodeMCU ESP8266 | $4 - $6          |
-| DHT22 (AM2302)  | $3 - $5          |
-| Breadboard      | $2 - $3          |
-| Jumper wires    | $1 - $2          |
-| Micro USB cable | $2 - $4          |
-| **Total**       | **~$15 - $20**   |
+| Component       | Approximate Cost     |
+| --------------- | -------------------- |
+| NodeMCU ESP8266 | $4 - $6              |
+| DHT22 (AM2302)  | $3 - $5              |
+| Breadboard      | $2 - $3              |
+| Jumper wires    | $1 - $2              |
+| Micro USB cable | $2 - $4              |
+| **Total** | **~$15 - $20** |
 
 ## Free Services for Testing
 
-| Service                                            | Purpose              |
-|----------------------------------------------------|----------------------|
-| [broker.emqx.io](https://www.emqx.com/en/mqtt/public-mqtt5-broker) | Public MQTT broker |
-| [MQTTX Web](https://mqttx.app/web-client)          | MQTT client/monitor  |
-| [Grafana Cloud](https://grafana.com/products/cloud/) | Data visualization |
+| Service                                                         | Purpose             |
+| --------------------------------------------------------------- | ------------------- |
+| [broker.emqx.io](https://www.emqx.com/en/mqtt/public-mqtt5-broker) | Public MQTT broker  |
+| [MQTTX Web](https://mqttx.app/web-client)                          | MQTT client/monitor |
+| [Grafana Cloud](https://grafana.com/products/cloud/)               | Data visualization  |
 
 ## Security Notes
 
@@ -146,11 +147,3 @@ nodemcu-dht22-sensor/
 ## License
 
 This project is licensed under the [MIT License](LICENSE) - ideal for learning and educational purposes.
-
-## Contributing
-
-Contributions are welcome! Feel free to submit issues and pull requests.
-
----
-
-*Created for educational purposes - Digital Marketing IoT Course, December 2025*
