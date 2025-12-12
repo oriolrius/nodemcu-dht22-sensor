@@ -144,6 +144,13 @@ nodemcu-dht22-sensor/
 - Never commit real credentials to the repository
 - Use the template file (`secrets.h.template`) for sharing code
 
+## Changes
+
+### December 2025
+
+- **LED Indicator**: Added built-in LED blink for 1 second on every MQTT publish
+- **Timezone Update**: Changed default timezone to Europe/Madrid (CET-1CEST)
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE) - ideal for learning and educational purposes.

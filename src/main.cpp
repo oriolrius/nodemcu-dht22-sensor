@@ -10,9 +10,11 @@
 
 // Function declarations
 void processCommand(String command, String source);
+void blinkLED();
  
 #define DHTPIN 4        // GPIO 4 (D2 pin on NodeMCU) connected to the DHT sensor
 #define DHTTYPE DHT22   // DHT 22 (AM2302)
+#define LED_BUILTIN 2   // Built-in LED on NodeMCU (GPIO2/D4)
  
 DHT dht(DHTPIN, DHTTYPE);
  
@@ -55,6 +57,12 @@ void NTPConnect(void) {
   } else {
     Serial.printf("Now is %s\n", DateTime.toISOString().c_str());
   }
+}
+
+void blinkLED() {
+  digitalWrite(LED_BUILTIN, LOW);   // Turn LED ON (LOW is ON for built-in LED)
+  delay(1000);                       // Keep ON for 1 second
+  digitalWrite(LED_BUILTIN, HIGH);  // Turn LED OFF (HIGH is OFF for built-in LED)
 }
 
 void messageReceived(char *topic, byte *payload, unsigned int length) {
@@ -185,11 +193,15 @@ void publishMessage() {
   serializeJson(doc, jsonBuffer); // print to client
  
   client.publish(PUBLISH_TOPIC, jsonBuffer);
+  blinkLED();  // Blink LED for 1 second after publishing
 }
 
 void setup() {
   Serial.begin(115200);
   Serial.println(F("\n=== DHT22 NodeMCU Sensor Starting ==="));
+  
+  pinMode(LED_BUILTIN, OUTPUT);
+  digitalWrite(LED_BUILTIN, HIGH);  // Initialize LED as OFF
   
   connectWiFi();
   NTPConnect();
